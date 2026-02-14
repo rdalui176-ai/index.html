@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sticker Maker</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #111;
+  color: white;
+}
+.container {
+  margin-top: 50px;
+}
+.preview {
+  margin-top: 20px;
+}
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  background: #222;
+  border-radius: 20px;
+}
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #25D366;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+input {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>WhatsApp Sticker Maker</h1>
+<input type="file" id="upload" accept="image/*">
+<div class="preview">
+  <canvas id="canvas" width="512" height="512" style="display:none;"></canvas>
+  <img id="previewImage">
+</div>
+<button onclick="downloadSticker()">Download Sticker</button>
+</div>
+
+<script>
+const upload = document.getElementById("upload");
+const previewImage = document.getElementById("previewImage");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+upload.addEventListener("change", function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      ctx.clearRect(0, 0, 512, 512);
+      ctx.drawImage(img, 0, 0, 512, 512);
+      previewImage.src = canvas.toDataURL("image/png");
+    }
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
+});
+
+function downloadSticker() {
+  const link = document.createElement("a");
+  link.download = "sticker.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+</script>
+
+</body>
+  </html>
+  
