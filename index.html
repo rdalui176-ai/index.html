@@ -1,85 +1,90 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sticker Maker</title>
+<title>Bangla Sticker Hub</title>
 <style>
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #111;
-  color: white;
+  margin:0;
+  font-family: Arial;
+  background:#0f0f0f;
+  color:white;
+  text-align:center;
 }
-.container {
-  margin-top: 50px;
+h1 {
+  padding:20px;
 }
-.preview {
-  margin-top: 20px;
+.pack {
+  margin:20px auto;
+  width:90%;
+  max-width:400px;
+  background:#1e1e1e;
+  padding:15px;
+  border-radius:15px;
 }
-img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  background: #222;
-  border-radius: 20px;
+.stickers {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:10px;
+}
+.stickers img {
+  width:100%;
+  border-radius:10px;
+  background:#222;
+  cursor:pointer;
 }
 button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #25D366;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  margin-top:10px;
+  padding:8px 15px;
+  border:none;
+  border-radius:8px;
+  background:#25D366;
+  color:white;
+  cursor:pointer;
 }
-input {
-  margin-top: 20px;
+footer {
+  margin-top:30px;
+  padding:15px;
+  font-size:14px;
+  opacity:0.6;
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-<h1>WhatsApp Sticker Maker</h1>
-<input type="file" id="upload" accept="image/*">
-<div class="preview">
-  <canvas id="canvas" width="512" height="512" style="display:none;"></canvas>
-  <img id="previewImage">
+<h1>Bangla Sticker Hub 😎</h1>
+
+<div class="pack">
+  <h2>Funny Pack 😂</h2>
+  <div class="stickers">
+    <img src="https://via.placeholder.com/512x512.png?text=Ki+Re" onclick="download(this.src)">
+    <img src="https://via.placeholder.com/512x512.png?text=Chup+Thak" onclick="download(this.src)">
+    <img src="https://via.placeholder.com/512x512.png?text=Ami+Bolchilam" onclick="download(this.src)">
+  </div>
 </div>
-<button onclick="downloadSticker()">Download Sticker</button>
+
+<div class="pack">
+  <h2>Attitude Pack 😎</h2>
+  <div class="stickers">
+    <img src="https://via.placeholder.com/512x512.png?text=Boss" onclick="download(this.src)">
+    <img src="https://via.placeholder.com/512x512.png?text=Level+Up" onclick="download(this.src)">
+    <img src="https://via.placeholder.com/512x512.png?text=No+Tension" onclick="download(this.src)">
+  </div>
 </div>
+
+<footer>
+Made by Raj 🔥 | More packs coming soon
+</footer>
 
 <script>
-const upload = document.getElementById("upload");
-const previewImage = document.getElementById("previewImage");
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
-upload.addEventListener("change", function(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    const img = new Image();
-    img.onload = function() {
-      ctx.clearRect(0, 0, 512, 512);
-      ctx.drawImage(img, 0, 0, 512, 512);
-      previewImage.src = canvas.toDataURL("image/png");
-    }
-    img.src = e.target.result;
-  }
-  reader.readAsDataURL(file);
-});
-
-function downloadSticker() {
-  const link = document.createElement("a");
+function download(url) {
+  const link = document.createElement('a');
+  link.href = url;
   link.download = "sticker.png";
-  link.href = canvas.toDataURL("image/png");
   link.click();
 }
 </script>
 
 </body>
-  </html>
-  
+</html>
